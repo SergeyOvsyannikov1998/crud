@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ru">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>preproject-2.3.1 - Edit User</title>
+</head>
+<body>
+<div>
+  <form th:method="PATCH" th:action="@{/user/edit/{id}(id=${user.getId()})}" th:object="${user}">
+    <table border="1">
+      <tr align="center">
+        <td><label for="firstname">First name:</label></td>
+        <td><input type="text" th:field="*{firstName}" id="firstname"/></td>
+      </tr>
+      <tr align="center">
+        <td><label for="lastname">Last name:</label></td>
+        <td><input type="text" th:field="*{lastName}" id="lastname"/></td>
+      </tr>
+      <tr align="center">
+        <td><label for="age">Age:</label></td>
+        <td><input type="text" th:field="*{age}" id="age"/></td>
+      </tr>
+      <tr align="center">
+        <td><input type="submit" value="Save"/></td>
+        <td><input type="button" value="Cancel" onClick='location.href="/"'></td>
+      </tr>
+    </table>
+  </form>
+</div>
+</body>
+</html>

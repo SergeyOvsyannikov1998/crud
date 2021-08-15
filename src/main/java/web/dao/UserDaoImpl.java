@@ -6,16 +6,16 @@ import web.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Component
 public class UserDaoImpl implements UserDao {
-    @Autowired
-    private EntityManagerFactory entityManagerFactory;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public void addUser(User user) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(user);
         entityManager.getTransaction().commit();
@@ -24,7 +24,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void removeUser(Long id) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         User user = entityManager.find(User.class, id);
         entityManager.remove(user);
@@ -34,7 +33,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateUser(User user, Long id) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
 
         User existUser = entityManager.find(User.class, id);
@@ -50,14 +48,14 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getUser(Long id) {
-        return entityManagerFactory.createEntityManager()
+        return entityManager
                 .find(User.class, id);
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public List<User> getAllUsers() {
-        return entityManagerFactory.createEntityManager()
+        return entityManager
                 .createQuery("FROM User")
                 .getResultList();
     }

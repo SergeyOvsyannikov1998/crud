@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ru">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>preproject-2.3.1</title>
+</head>
+    <body>
+    <h1>User list</h1>
+    <table border="">
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Age</th>
+            <th colspan="2">Actions</th>
+        </tr>
+        <tr align="center" th:each="user : ${users}">
+            <td width="10%" th:text="${user.getFirstName()}"></td>
+            <td width="10%" th:text="${user.getLastName()}"></td>
+            <td width="10%" th:text="${user.getAge()}"></td>
+            <td width="10%"><a th:href="@{|/user/edit/${user.getId()}|}">Edit</a></td>
+            <td width="10%"><a th:href="@{|/user/remove/${user.getId()}|}">Remove</a></td>
+        </tr>
+    </table>
+    <br>
+    <div><a href="/user/add">Add user</a></div>
+    <div><a href="/">Refresh</a></div>
+    </body>
+</html>
