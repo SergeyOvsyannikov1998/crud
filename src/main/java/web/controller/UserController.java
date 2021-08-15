@@ -11,8 +11,11 @@ import web.service.UserServiceImpl;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+    private final UserService userService;
     @Autowired
-    private UserService userService;
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/add")
     public String addUser(@ModelAttribute("user") User user) {
